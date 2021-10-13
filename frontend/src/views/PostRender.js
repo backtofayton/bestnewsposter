@@ -68,39 +68,43 @@ const PostRender = () => {
 
     function toggleVote() {
         // console.log('favorites: ', favorites)
-        if (voteState == 'vote') {
-            fetch(`/api/data/news/${postId}/?vote=up`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Token ${localStorage.getItem('token')}`
-                }
-            })
-                .then(res => res.json())
-                .then(data => {
-                    console.log('response from vote up:', data)
-                    postData.point = data.point
-                    // console.log('upvote old favorites: ', favorites)
-                    // let updatedFavorites = [...favorites, postId]
-                    // console.log('upvote favorites: ', updatedFavorites)
-                    setFavorites([...favorites, postId])
+        if (localStorage.getItem('token') !== null) {
+            if (voteState == 'vote') {
+                fetch(`/api/data/news/${postId}/?vote=up`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Token ${localStorage.getItem('token')}`
+                    }
                 })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log('response from vote up:', data)
+                        postData.point = data.point
+                        // console.log('upvote old favorites: ', favorites)
+                        // let updatedFavorites = [...favorites, postId]
+                        // console.log('upvote favorites: ', updatedFavorites)
+                        setFavorites([...favorites, postId])
+                    })
+            } else {
+                fetch(`/api/data/news/${postId}/?vote=down`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Token ${localStorage.getItem('token')}`
+                    }
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        postData.point = data.point
+                        console.log('postId when removing: ', postId)
+                        let newValuesOfFavorites = favorites.filter(item => item != postId)
+                        setFavorites(newValuesOfFavorites)
+                        // localStorage.setItem('favorites', )
+                    })
+            }
         } else {
-            fetch(`/api/data/news/${postId}/?vote=down`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Token ${localStorage.getItem('token')}`
-                }
-            })
-                .then(res => res.json())
-                .then(data => {
-                    postData.point = data.point
-                    console.log('postId when removing: ', postId)
-                    let newValuesOfFavorites = favorites.filter(item => item != postId)
-                    setFavorites(newValuesOfFavorites)
-                    // localStorage.setItem('favorites', )
-                })
+            window.location.replace('/login');
         }
     }
 
