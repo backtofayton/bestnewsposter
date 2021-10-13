@@ -34,7 +34,7 @@ const Logout = () => {
             {loading === false && (
                 <Fragment>
                     <h4>Are you sure you want to logout?</h4>
-                    <input type='button' value='Logout' onClick={handleLogout} />
+                    <input className='btn btn-danger my-1' type='button' value='Logout' onClick={handleLogout} />
                 </Fragment>
             )}
         </div>
