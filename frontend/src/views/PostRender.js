@@ -124,7 +124,8 @@ const PostRender = () => {
                     <h4><a className="postRenderLinks" href={postData.url ? postData.url : ''}>{postData.title}</a>
                         <span onClick={toggleVote} className={voteState}>
                         </span> <small className='mx-2'>{postData.point}</small></h4>
-                    {postData.text ? <div className='mb-1'>{postData.text}</div> : ''}
+                    {postData.text ? <pre className='mb-2 postRender-textDisplay'>
+                        {postData.text}</pre> : ''}
                 </div>
                 <CommentCreate onNewComment={(a, b) => getComments(b)}
                     mainPage={true} postId={postId} />

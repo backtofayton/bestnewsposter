@@ -73,8 +73,14 @@ a:hover, postLinks:hover{
   color:rgb(83, 88, 136);
 }
 
+.postRender-textDisplay{
+  white-space: pre-wrap;
+  /* word-wrap: break-word; */
+}
+
 .btn{
   margin-top: 0.2rem;
+  margin-bottom: 0.3rem;
 }
 
 .btn-outline-info{
