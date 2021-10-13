@@ -1,0 +1,16 @@
+{% extends "hackernews/boilerplate.html" %}
+
+{% block content %}
+<form action="{% url 'hackernews:newUserSave' %}" method="POST">
+    {% csrf_token %}
+    <label for="username">Username</label>
+    <input id="username" name="username" type="text">
+    <!-- <label for="email">Email</label>
+    <input id="email" name="email" type="text"> -->
+    <label for="password1">Password</label>
+    <input id="password1" name="password1" type="password">
+    <label for="password2">Re-Password</label>
+    <input id="password2" name="password2" type="password">
+    <button>Submit</button>
+</form>
+{% endblock %}

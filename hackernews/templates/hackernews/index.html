@@ -1,0 +1,15 @@
+{% extends "hackernews/boilerplate.html" %}
+
+{% block content %}
+
+{% if newsposts %}
+<ul>
+    {% for post in newsposts %}
+    <li><a href="{% url 'hackernews:index' %}">{{post.title}}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No post is available.</p>
+{% endif %}
+
+{% endblock %}

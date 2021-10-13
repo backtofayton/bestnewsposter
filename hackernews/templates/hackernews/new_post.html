@@ -1,0 +1,14 @@
+{% extends "hackernews/boilerplate.html" %}
+
+{% block content %}
+<br>
+<form action="{% url 'hackernews:newPost' %}" method="POST">
+    {% csrf_token %}
+    <label for="title">Title</label>
+    <input id="title" name="title" type="text">
+    <label for="url">Url</label>
+    <input id="url" name="url" type="text">
+    <button>Submit</button>
+</form>
+
+{% endblock %}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News</title>
+</head>
+
+<body>
+
+    {% if user.is_authenticated %}
+
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'hackernews:userLogout' %}">Logout</a>
+    </li>
+    <li class="nav-item">
+        <!-- <a class="nav-link" href="">Welcome, {{user.username}}</a> -->
+        Welcome, {{user.username}}
+
+    </li>
+    <br>
+    {% else %}
+
+    <div>
+        <form action="{% url 'hackernews:userLogin' %}" method="POST">
+            {% csrf_token %}
+            <label for="username">Username</label>
+            <input id="username" name="username" type="text">
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password">
+            <button>Login</button>
+        </form>
+    </div>
+    {% endif %}
+    <!-- <br> -->
+    <div>
+        <a href="{% url 'hackernews:index' %}">Home</a>
+        <a href="{% url 'hackernews:newPost' %}">New</a>
+        <a href="{% url 'hackernews:signup' %}">Register</a>
+    </div>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <body>
+        <!-- <div id="sidebar">
+            {% block sidebar %}
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/blog/">Blog</a></li>
+            </ul>
+            {% endblock %}
+        </div> -->
+
+        <div id="content">
+            {% block content %}
+
+            {% endblock %}
+        </div>
+    </body>
+
+</body>
+
+</html>
