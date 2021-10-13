@@ -18,3 +18,8 @@ node_modules
 # On our project configuration, the output of the collectstatic will be stored in 
 # staticfiles directory. We are ignoring files inside staticfiles but we'll track this # folder itself so that collectstatic can work on Heroku
 staticfiles/*
+
+# old django apps
+cars/
+hello_world/
+polls/
