@@ -15,8 +15,8 @@ Including another URLconf
 """
 from django.urls import include, path
 from django.contrib import admin
-from django.urls import path
-from django.urls import path, include  # import include
+from django.urls import path, include, re_path
+from .views import FrontendAppView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,5 +24,5 @@ urlpatterns = [
     path('polls/', include('polls.urls')),
     path('api/users/', include('users.urls')),
     path("api/news/", include("hackernews.urls")),  # add this line
-    # path('', index, name='index'),
+    re_path(r'^', FrontendAppView.as_view()),
 ]
