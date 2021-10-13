@@ -73,7 +73,7 @@ const CommentCreate = (props) => {
 
 
     return (
-        <form className='ms-3 mt-2 form-group' onSubmit={onCommentSubmit}>
+        <form className='mx-1 mt-2 form-group' onSubmit={onCommentSubmit}>
             <textarea
                 className='form-control'
                 name='comment'
