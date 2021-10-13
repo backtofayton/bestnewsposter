@@ -20,8 +20,8 @@ from .views import FrontendAppView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("cars/", include("cars.urls")),
-    path('polls/', include('polls.urls')),
+    # path("cars/", include("cars.urls")),
+    # path('polls/', include('polls.urls')),
     path('api/users/', include('users.urls')),
     path('api/data/', include('hackernews.urls')),  # add this line
     re_path(r'^', FrontendAppView.as_view()),

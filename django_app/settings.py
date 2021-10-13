@@ -60,10 +60,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Local Apps
     'users',  # new
-    'hello_world',
-    'cars',
+    # 'hello_world',
+    # 'cars',
     # 'polls',
-    'polls.apps.PollsConfig',
+    # 'polls.apps.PollsConfig',
     'hackernews.apps.HackernewsConfig',
     # 3rd Party Apps
     'rest_framework',  # new
