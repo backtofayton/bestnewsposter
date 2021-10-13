@@ -47,7 +47,7 @@ const Dashboard = () => {
                 <Fragment>
                     {/* <h1>Dashboard</h1> */}
                     {/* <section className='mt-1'>Hello {username}!</section> */}
-                    <div className='col-md-10'>
+                    <div className='col-12 col-sm-10 col-md-10'>
                         {news.map(element => {
                             return (<div key={element.id} className='bg-secondary py-1 px-2 rounded my-1'>
                                 <a className='postLinks' href={`http://${element.url}`}>{element.title}</a>
