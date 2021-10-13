@@ -11,7 +11,7 @@ const Post = () => {
         if (localStorage.getItem('token') === null) {
             window.location.replace('/login');
         } else {
-            fetch('/api/news/news/', {
+            fetch('/api/data/news/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

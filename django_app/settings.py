@@ -16,7 +16,6 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 load_dotenv()
-print(os.environ.get('SERVER', 'THERE IS NO PROXY SERVER INFO DEAR USER'))
 DEBUG = int(os.environ.get("DEBUG", default=0))
 SECRET_KEY = os.environ.get('SECRET_KEY')
 # 'DJANGO_ALLOWED_HOSTS' should be a single string of hosts with a space between each.

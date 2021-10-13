@@ -5,7 +5,7 @@ if (process.env.NODE_ENV == 'development') { server = process.env.REACT_APP_LOCA
 else if (process.env.NODE_ENV == 'production') {
     server = process.env.REACT_APP_PRODUCTION_PROXY
 }
-console.log('server: ', server)
+console.log('proxy server= ', server, '\nenv= ', process.env.NODE_ENV)
 
 const secure = false;
 // const server = 'http://127.0.0.1:8000'
@@ -18,7 +18,7 @@ module.exports = function (app) {
             logLevel: 'debug'
         }
     ));
-    app.use(createProxyMiddleware('/api/news',
+    app.use(createProxyMiddleware('/api/data',
         {
             // secure: secure,
             target: server,

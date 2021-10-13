@@ -9,11 +9,11 @@ from rest_framework import routers
 from .api import NewspostViewSet, CommentViewSet
 
 
-router = routers.DefaultRouter()
+router = routers.SimpleRouter()
 # router.register('/', views.index, 'index')
-router.register('news', NewspostViewSet, 'news')
+router.register(r'news', NewspostViewSet)
 # router.register('api/comment(?P<postId>\d+)', CommentSearchSet, 'comments')
-router.register('comment', CommentViewSet, 'comments')
+router.register(r'comment', CommentViewSet)
 # router.register('^api/comment/(?P<postId>.+)/$',
 # CommentListViewSet, 'commentList')
 # re_path('^purchases/(?P<username>.+)/$', PurchaseList.as_view()),
@@ -23,12 +23,13 @@ router.register('comment', CommentViewSet, 'comments')
 
 app_name = 'hackernews'
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', include(router.urls)),
+    # path('', views.index, name='index'),
     path('signup/', views.signup, name='signup'),
     path('new-post/', views.newPost, name='newPost'),
     path('login/', views.userLogin, name='userLogin'),
     path('logout/', views.userLogout, name='userLogout'),
-    url(r'^', include(router.urls), name='routerurls'),
+    # url(r'^', include(router.urls), name='routerurls'),
     # path('api/', include(router.urls)),
     # path('<int:question_id>/', views.detail, name='detail'),
     # path('<int:question_id>/results/', views.results, name='results'),
@@ -38,3 +39,5 @@ urlpatterns = [
     # path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
     # path('<int:question_id>/vote/', views.vote, name='vote'),
 ]
+
+# urlpatterns += router.urls

@@ -23,6 +23,6 @@ urlpatterns = [
     path("cars/", include("cars.urls")),
     path('polls/', include('polls.urls')),
     path('api/users/', include('users.urls')),
-    path("api/news/", include("hackernews.urls")),  # add this line
+    path('api/data/', include('hackernews.urls')),  # add this line
     re_path(r'^', FrontendAppView.as_view()),
 ]

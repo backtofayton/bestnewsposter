@@ -25,17 +25,17 @@ const PostRender = () => {
 
     function getComments(postId) {
         //fetch the post
-        fetch(`/api/news/news/${postId}/`)
+        fetch(`/api/data/news/${postId}/`)
             .then(res => res.json())
             .then(dataOfPost => {
                 // setUserEmail(data.email);
                 // setUsername(data.username)
-                console.log(dataOfPost)
+                console.log('dataOfPost: ', dataOfPost)
                 setPostData(dataOfPost)
             })
             .then(() => {
                 //fetch the comments of the post
-                fetch(`/api/news/comment?newspost=${postId}`)
+                fetch(`/api/data/comment/?newspost=${postId}`)
                     .then(res => {
                         console.log(res)
                         return res.json()
@@ -45,17 +45,18 @@ const PostRender = () => {
                         setComments(commentsOfPost.reverse())
                         setLoading(false)
                     })
+                    .catch(e => console.log('error for comment: ', e))
             })
             .catch(error => {
                 window.location.reload()
-                console.log(error)
+                console.log(error, 'there is error')
             })
     }
 
     function toggleVote() {
         // console.log('favorites: ', favorites)
         if (voteState == 'vote') {
-            fetch(`/api/news/news/${postId}?vote=up`, {
+            fetch(`/api/data/news/${postId}/?vote=up`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -72,7 +73,7 @@ const PostRender = () => {
                     setFavorites([...favorites, postId])
                 })
         } else {
-            fetch(`/api/news/news/${postId}?vote=down`, {
+            fetch(`/api/data/news/${postId}/?vote=down`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -108,20 +109,20 @@ const PostRender = () => {
 
     return (
         <div>
-            {loading === false && (
-                <Fragment>
-                    <div className='col-md-8'>
-                        <h4><a className="postRenderLinks" href={`${postData.url}`}>{postData.title}</a>
-                            <span onClick={toggleVote} className={voteState}>
-                            </span> <small className='mx-2'>{postData.point}</small></h4>
-                    </div>
-                    <CommentCreate onNewComment={(a, b) => getComments(b)}
-                        mainPage={true} postId={postId} />
-                    <Comment onNewPost={(a) => updateHasReplies(a)}
-                        onCommentDelete={(c, p, t) => getComments(p)}
-                        comments={comments} postId={postId} />
-                </Fragment>
-            )}
+            {/* {loading === false && ( */}
+            <Fragment>
+                <div className='col-md-8'>
+                    <h4><a className="postRenderLinks" href={`${postData.url}`}>{postData.title}</a>
+                        <span onClick={toggleVote} className={voteState}>
+                        </span> <small className='mx-2'>{postData.point}</small></h4>
+                </div>
+                <CommentCreate onNewComment={(a, b) => getComments(b)}
+                    mainPage={true} postId={postId} />
+                <Comment onNewPost={(a) => updateHasReplies(a)}
+                    onCommentDelete={(c, p, t) => getComments(p)}
+                    comments={comments} postId={postId} />
+            </Fragment>
+            {/* )} */}
         </div>
     )
 }

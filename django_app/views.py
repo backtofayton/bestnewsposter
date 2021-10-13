@@ -18,6 +18,7 @@ class FrontendAppView(View):
             with open(self.index_file_path) as f:
                 return HttpResponse(f.read())
         except FileNotFoundError:
+            print('hit on react index router of python')
             logging.exception('Production build of app not found')
             return HttpResponse(
                 """

@@ -20,7 +20,7 @@ const CommentNester = (props) => {
 
     function showReplies(commentId, postId, updateMode = false) {
         console.log('show replies for: ', commentId)
-        fetch(`/api/news/comment?newspost=${postId}&replyTo=${commentId}`)
+        fetch(`/api/data/comment/?newspost=${postId}&replyTo=${commentId}`)
             .then(res => {
                 console.log(res)
                 return res.json()
@@ -48,7 +48,7 @@ const CommentNester = (props) => {
                     if (updateMode) {
                         //if there is no replies left, update the comment field
                         let commentObj = { hasReplies: false }
-                        fetch(`/api/news/comment/${commentId}/`, {
+                        fetch(`/api/data/comment/${commentId}/`, {
                             method: 'PATCH',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ const CommentNester = (props) => {
     }
 
     function deleteComment(commentId, commentReplyTo) {
-        fetch(`/api/news/comment/${commentId}/`, {
+        fetch(`/api/data/comment/${commentId}/`, {
             method: 'DELETE',
             headers: {
                 Authorization: `Token ${localStorage.getItem('token')}`
@@ -100,38 +100,40 @@ const CommentNester = (props) => {
     }
 
     return (
-        props.comments.map((comment, index) => {
-            return (
-                <div key={comment.id} className="m-2 ms-3">
-                    <section className='commentHeader' style={{
-                        backgroundColor: 'black',
-                        color: 'white',
-                        alignSelf: 'flex-start',
-                        display: 'inline-block'
-                    }}>{comment.customuser} - {comment.comment_date}</section>
-                    <div className='py-1'>{comment.text}</div>
-                    <button className='btn btn-sm btn-primary' onClick={() => replyToComment(comment.id)}>reply</button>
-                    <span> </span>
-                    {comment.hasReplies
-                        ? <button className='btn btn-sm btn-primary' onClick={() => { showReplies(comment.id, props.postId) }}>view replies</button>
-                        : ''
-                    }
-                    <span> </span>
-                    {comment.user == localUserId
-                        ? <button className='btn btn-sm btn-danger' onClick={() => { deleteComment(comment.id, comment.replyTo) }}>delete</button>
-                        : ''
-                    }
-                    {activeFieldForReply == comment.id && replySwitchOn
-                        ? <Comment onNewPost={(a) => updateHasReplies(a)}
-                            onCommentDelete={(c, p, u) => showReplies(c, p, u)}
-                            comments={replies} postId={props.postId} />
-                        : ''}
-                    {activeTextFieldForReply == comment.id
-                        ? <CommentCreate onNewComment={(a, b, u) => showReplies(a, b, u)} cancelButton={cancelButton} postId={props.postId} replyTo={comment.id} />
-                        : ''}
-                </div>
-            )
-        })
+        Object.keys(props.comments).length > 0 // if there is any comment load comments
+            ? props.comments.map((comment, index) => {
+                return (
+                    <div key={comment.id} className="m-2 ms-3">
+                        <section className='commentHeader' style={{
+                            backgroundColor: 'black',
+                            color: 'white',
+                            alignSelf: 'flex-start',
+                            display: 'inline-block'
+                        }}>{comment.customuser} - {comment.comment_date}</section>
+                        <div className='py-1'>{comment.text}</div>
+                        <button className='btn btn-sm btn-primary' onClick={() => replyToComment(comment.id)}>reply</button>
+                        <span> </span>
+                        {comment.hasReplies
+                            ? <button className='btn btn-sm btn-primary' onClick={() => { showReplies(comment.id, props.postId) }}>view replies</button>
+                            : ''
+                        }
+                        <span> </span>
+                        {comment.user == localUserId
+                            ? <button className='btn btn-sm btn-danger' onClick={() => { deleteComment(comment.id, comment.replyTo) }}>delete</button>
+                            : ''
+                        }
+                        {activeFieldForReply == comment.id && replySwitchOn
+                            ? <Comment onNewPost={(a) => updateHasReplies(a)}
+                                onCommentDelete={(c, p, u) => showReplies(c, p, u)}
+                                comments={replies} postId={props.postId} />
+                            : ''}
+                        {activeTextFieldForReply == comment.id
+                            ? <CommentCreate onNewComment={(a, b, u) => showReplies(a, b, u)} cancelButton={cancelButton} postId={props.postId} replyTo={comment.id} />
+                            : ''}
+                    </div>
+                )
+            })
+            : ''
     )
 };
 

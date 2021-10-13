@@ -34,7 +34,7 @@ const CommentCreate = (props) => {
                     return commentObj;
                 })
                 .then(post => {
-                    fetch(`/api/news/comment/`, {
+                    fetch(`/api/data/comment/`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ const CommentCreate = (props) => {
                             if (data.id && !props.mainPage) {
                                 //update the replied comment with hasReplies=true value
                                 let commentObj = { hasReplies: true }
-                                fetch(`/api/news/comment/${props.replyTo}/`, {
+                                fetch(`/api/data/comment/${props.replyTo}/`, {
                                     method: 'PATCH',
                                     headers: {
                                         'Content-Type': 'application/json',

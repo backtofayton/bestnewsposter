@@ -26,7 +26,7 @@ const Dashboard = () => {
                     console.log('dashboard favorites: ', localStorage.getItem('favorites'))
                 });
         }
-        fetch('/api/news/news/', {
+        fetch('/api/data/news/', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
