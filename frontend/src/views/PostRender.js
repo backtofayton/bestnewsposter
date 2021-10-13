@@ -16,12 +16,25 @@ const PostRender = () => {
     const [comments, setComments] = useState({});
     const [reply_to, setReply_to] = useState('0');
     const [voteState, setVoteState] = useState('vote');
-    const [favorites, setFavorites] = useState(localStorage.getItem('favorites').split(','));
+    const [favorites, setFavorites] = useState('');
     // PostID()
 
     useEffect(() => {
+        if (localStorage.getItem('token') !== null) {
+            setFavorites(localStorage.getItem('favorites').split(','))
+        }
         getComments(postId)
     }, [])
+
+    useEffect(() => {
+        if (localStorage.getItem('token') !== null) {
+            localStorage.setItem('favorites', favorites.join())
+            console.log('favorites: ', favorites)
+            favorites.includes(postId.toString())
+                ? setVoteState('vote on')
+                : setVoteState('vote')
+        }
+    }, [favorites, postData])
 
     function getComments(postId) {
         //fetch the post
@@ -98,14 +111,6 @@ const PostRender = () => {
         newComments[commentIndexUpdate].hasReplies = true
         setComments(newComments)
     }
-
-    useEffect(() => {
-        localStorage.setItem('favorites', favorites.join())
-        console.log('favorites: ', favorites)
-        favorites.includes(postId.toString())
-            ? setVoteState('vote on')
-            : setVoteState('vote')
-    }, [favorites, postData])
 
     return (
         <div>
