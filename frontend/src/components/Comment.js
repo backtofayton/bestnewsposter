@@ -107,23 +107,18 @@ const Comment = (props) => {
             ? props.comments.map((comment, index) => {
                 return (
                     <div key={comment.id} className="m-2 ms-3">
-                        <section className='commentHeader' style={{
-                            backgroundColor: 'black',
-                            color: 'white',
-                            alignSelf: 'flex-start',
-                            display: 'inline-block'
-                        }}>{comment.customuser} - {comment.comment_date}</section>
+                        <section className='commentHeader'>{comment.customuser} - {comment.comment_date}</section>
                         <div className='py-1'>{comment.text}</div>
-                        <button className='btn btn-sm btn-primary' onClick={() => replyToComment(comment.id)}>reply</button>
+                        <button className='btn btn-sm btn-outline-primary' onClick={() => replyToComment(comment.id)}>reply</button>
                         <span> </span>
                         {comment.hasReplies
-                            ? <button className='btn btn-sm btn-primary'
+                            ? <button className='btn btn-sm btn-outline-info'
                                 onClick={() => { showReplies(comment.id, props.postId) }}>view replies</button>
                             : ''
                         }
                         <span> </span>
                         {comment.user == localUserId
-                            ? <button className='btn btn-sm btn-danger'
+                            ? <button className='btn btn-sm btn-outline-danger'
                                 onClick={() => { deleteComment(comment.id, comment.replyTo) }}>delete</button>
                             : ''
                         }

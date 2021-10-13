@@ -60,27 +60,27 @@ const Login = (props) => {
             {loading === false && (
                 <form onSubmit={onSubmit}
                     className='mt-1'>
-                    <label htmlFor='username'>Username:</label>
-                    <input
-                        className='mx-1'
-                        name='username'
-                        type='text'
-                        value={username}
-                        required
-                        onChange={e => setUsername(e.target.value)}
-                    />{' '}
-                    {/* <br /> */}
-                    <label htmlFor='password'>Password:</label>
-                    <input
-                        className='mx-1'
-                        name='password'
-                        type='password'
-                        value={password}
-                        required
-                        onChange={e => setPassword(e.target.value)}
-                    />{' '}
-                    {/* <br /> */}
-                    <input type='submit' value='Login' />
+                    <div className='form-group col-md-6'>
+                        <label className='' htmlFor='username'>Username:</label>
+                        <input
+                            className='mx-1 form-control'
+                            name='username'
+                            type='text'
+                            value={username}
+                            required
+                            onChange={e => setUsername(e.target.value)}
+                        /></div>
+                    <div className='form-group col-md-6'>
+                        <label htmlFor='password'>Password:</label>
+                        <input
+                            className='mx-1 form-control'
+                            name='password'
+                            type='password'
+                            value={password}
+                            required
+                            onChange={e => setPassword(e.target.value)}
+                        /></div>
+                    <input className='btn btn-primary' type='submit' value='Login' />
                 </form>
             )}
             {errors === true && <section>Cannot log in with provided credentials</section>}

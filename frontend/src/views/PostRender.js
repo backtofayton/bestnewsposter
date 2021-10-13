@@ -20,6 +20,7 @@ const PostRender = () => {
     // PostID()
 
     useEffect(() => {
+        console.log('look favorites: ', localStorage.getItem('favorites'))
         if (localStorage.getItem('token') !== null) {
             setFavorites(localStorage.getItem('favorites').split(','))
         }
@@ -28,7 +29,6 @@ const PostRender = () => {
 
     useEffect(() => {
         if (localStorage.getItem('token') !== null) {
-            localStorage.setItem('favorites', favorites.join())
             console.log('favorites: ', favorites)
             favorites.includes(postId.toString())
                 ? setVoteState('vote on')
@@ -121,9 +121,10 @@ const PostRender = () => {
             {/* {loading === false && ( */}
             <Fragment>
                 <div className='col-md-8'>
-                    <h4><a className="postRenderLinks" href={`${postData.url}`}>{postData.title}</a>
+                    <h4><a className="postRenderLinks" href={postData.url ? postData.url : ''}>{postData.title}</a>
                         <span onClick={toggleVote} className={voteState}>
                         </span> <small className='mx-2'>{postData.point}</small></h4>
+                    {postData.text ? <div className='mb-1'>{postData.text}</div> : ''}
                 </div>
                 <CommentCreate onNewComment={(a, b) => getComments(b)}
                     mainPage={true} postId={postId} />

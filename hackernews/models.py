@@ -12,7 +12,8 @@ from users.models import CustomUser
 
 class Newspost(models.Model):
     title = models.CharField(max_length=200)
-    url = models.CharField(max_length=200)
+    url = models.CharField(max_length=200, blank=True)
+    text = models.CharField(max_length=1500, blank=True)
     pub_date = models.DateTimeField(auto_now_add=True)
     point = models.IntegerField(default=0)
     author = models.ForeignKey(

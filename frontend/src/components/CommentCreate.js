@@ -73,15 +73,15 @@ const CommentCreate = (props) => {
 
 
     return (
-        <form className='ms-3 mt-1' onSubmit={onCommentSubmit}>
+        <form className='ms-3 mt-2 form-group' onSubmit={onCommentSubmit}>
             <textarea
+                className='form-control'
                 name='comment'
                 id='comment'
                 required
                 value={comment}
                 onChange={e => setComment(e.target.value)}
-                rows="5" cols="40"></textarea>
-            <br />
+                rows="3" cols="40"></textarea>
             <button className='btn btn-sm btn-primary' type="submit">add comment</button>
             <span> </span>
             {props.mainPage
