@@ -23,3 +23,5 @@ staticfiles/*
 cars/
 hello_world/
 polls/
+
+.vscode
