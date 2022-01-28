@@ -50,7 +50,7 @@ const Dashboard = () => {
                     <div className='col-12 col-sm-10 col-md-10'>
                         {news.map(element => {
                             return (<div key={element.id} className='bg-secondary py-1 px-2 rounded my-1'>
-                                <a target='_blank' className='postLinks' href={`${element.url}`}>{element.title}</a>
+                                <a target="_blank" rel="noreferrer noopener" className='postLinks' href={`${element.url}`}>{element.title}</a>
                                 <span>  </span>
                                 <a className='commentLinks' style={{ fontSize: '0.8rem' }} href={`news/${element.id}`} >Comments</a>
                             </div>)
